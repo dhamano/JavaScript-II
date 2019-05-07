@@ -23,8 +23,25 @@ console.log(newCounter());
 // newCounter(); // 2
 
 // ==== Challenge 3: Create a counter function with an object that can increment and decrement ====
-const counterFactory = () => {
+const counterFactory = (incDec) => {
   // Return an object that has two methods called `increment` and `decrement`.
   // `increment` should increment a counter variable in closure scope and return it.
   // `decrement` should decrement the counter variable and return it.
+  let counting = 0;
+  return(function(incDec) {
+    if(incDec ==='increment') {
+      return (++counting);
+    } else if (incDec === 'decrement') {
+      return(--counting);
+    } else { return (counting); }
+  });
 };
+const newFactory = counterFactory();
+console.log(newFactory('increment'));
+console.log(newFactory('increment'));
+console.log(newFactory('increment'));
+console.log(newFactory('decrement'));
+console.log(newFactory('decrement'));
+console.log(newFactory('increment'));
+console.log(newFactory());
+
