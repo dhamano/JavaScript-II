@@ -61,8 +61,15 @@ contains('Notebook', items, console.log)
 
 /* STRETCH PROBLEM */
 
+const itemsList = ['Pencil', 'Notebook', 'yo-yo', 'Gum', 'Notebook', 'Gum', 'Book', 'Gimbal'];
+
 function removeDuplicates(array, cb) {
   // removeDuplicates removes all duplicate values from the given array.
   // Pass the duplicate free array to the callback function.
   // Do not mutate the original array.
+  return cb(array.filter((arrayItem, index) => {
+    return array.indexOf(arrayItem) === index
+  }))
 }
+
+removeDuplicates(itemsList, console.log)
