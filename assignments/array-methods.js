@@ -60,18 +60,14 @@ const runners = [{"id":1,"first_name":"Charmain","last_name":"Seiler","email":"c
 // The event director needs both the first and last names of each runner for their running bibs.
 // Combine both the first and last names into a new array called fullName. 
 let fullName = [];
-runners.forEach( (runner) => {
-  fullName.push(`${runner.first_name} ${runner.last_name}`);
-})
+runners.forEach(runner => fullName.push(`${runner.first_name} ${runner.last_name}`));
 console.log(fullName);
 
 // ==== Challenge 2: Use .map() ====
 // The event director needs to have all the runner's first names converted to uppercase because
 // the director BECAME DRUNK WITH POWER. Convert each first name into all caps and log the result
 let allCaps = [];
-runners.map(runner => {
-  allCaps.push(runner.first_name.toUpperCase())
-})
+runners.map(runner => allCaps.push(runner.first_name.toUpperCase()));
 console.log(allCaps); 
 
 // ==== Challenge 3: Use .filter() ====
@@ -85,8 +81,12 @@ console.log(largeShirts);
 // ==== Challenge 4: Use .reduce() ====
 // The donations need to be tallied up and reported for tax purposes.
 // Add up all the donations into a ticketPriceTotal array and log the result
+/*
 let ticketPriceTotal = [];
-ticketPriceTotal[0] = runners.reduce( (sumSales,runner) => sumSales += runner.donation), 0)
+ticketPriceTotal[0] = runners.reduce((ticketPriceTotal,runner) => { return ticketPriceTotal += runner.donation }, 0)
+console.log(ticketPriceTotal);
+//*/
+let ticketPriceTotal = runners.reduce((ticketPriceTotal,runner) => ticketPriceTotal += runner.donation, 0)
 console.log(ticketPriceTotal);
 
 // ==== Challenge 5: Be Creative ====
@@ -95,7 +95,30 @@ console.log(ticketPriceTotal);
 // Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
 // Problem 1
+// get all donors that contributed $x or more for a thank you poster
+function getCompaniesWithDonoationsAtOrOver(array, minimumDonationAmount, cb) {
+  return cb(array.filter((arrayItem) => arrayItem.donation >= minimumDonationAmount).map(arrayItem => arrayItem.company_name))
+}
+getCompaniesWithDonoationsAtOrOver(runners, 200, console.log);
 
 // Problem 2
+// get all full name and email for marketing campaign
+function getFullNameAndEmail(array, cb) {
+  return cb(array.map((arrayItem) => {
+    return { 'full_name' : `${arrayItem.first_name} ${arrayItem.last_name}`, 'email' : arrayItem.email}
+  }))
+}
+
+getFullNameAndEmail(runners, console.log)
 
 // Problem 3
+// get the highest donor(s) so they can get special recognition
+function getHighestDonors(array, cb) {
+  let highestDonation = array.reduce((currentHighestDonation, currentDonation) => {
+    return ((currentHighestDonation > currentDonation.donation) ? currentHighestDonation : currentDonation.donation);
+  })
+  console.log('highestDonation',highestDonation);
+  cb(array.filter((arrayItem) => arrayItem.donation >= highestDonation))
+}
+
+getHighestDonors(runners, console.log);
