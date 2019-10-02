@@ -1,6 +1,10 @@
 // ==== Challenge 1: Write your own closure ====
 // Write a simple closure of your own creation.  Keep it simple!
 
+const goodbye = 'Thanks for all the fish!';
+function printGoodbye() { return goodbye; }
+console.log(printGoodbye());
+
 
 /* STRETCH PROBLEMS, Do not attempt until you have completed all previous tasks for today's project files */
 
